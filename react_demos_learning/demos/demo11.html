@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax请求</title>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+    <script src="../build/jquery.min.js"></script>
+</head>
+<body>
+    <div id="example"></div>
+    <script type="text/babel">
+       var UserGist = React.createClass({
+           getInitialState : function(){
+               return {
+                   username : '',
+                   lastGistUrl : ''
+               }
+           },
+           componentDidMount : function(){
+                //获取数据
+               $.get(this.props.source,function(res){
+                   var lastGist = res[0];
+                   //如果组件渲染到了 DOM 中，isMounted() 返回 true。可以使用该方法保证 setState() 和 forceUpdate() 在异步场景下的调用不会出错。
+                   if(this.isMounted()){
+                       this.setState({
+                           username : lastGist.owner.login,
+                           lastGistUrl : lastGist.html_url
+                       })
+                   }
+               }.bind(this));
+           },
+           render : function () {
+               return (
+                   <div>
+                       {this.state.username} last gist is <a href={this.state.lastGistUrl}>here</a>
+                   </div>
+               )
+           }
+       })
+        ReactDOM.render(
+            <UserGist source = 'https://api.github.com/users/octocat/gists'/>,
+            document.getElementById('example')
+        )
+    </script>
+</body>
+</html>

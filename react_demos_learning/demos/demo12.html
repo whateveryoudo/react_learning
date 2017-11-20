@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>promise重写</title>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+    <script src="../build/jquery.min.js"></script>
+</head>
+<body>
+    <div id="example"></div>
+    <script type="text/babel">
+       var UserGist = React.createClass({
+           getInitialState : function () {
+               return {
+                  loading : true,
+                   error : null,
+                   data : null
+               }
+           },
+            componentDidMount : function(){
+                this.props.promise.then(
+                    value => {this.setState({
+                        loading : false,
+                        data : value
+                    }),
+                    error => {this.setState({
+                        loading: false,
+                        error : error
+                    })}}
+                )
+            },
+           render : function(){
+                if(this.state.loading){//返回loading状态
+                    return <span>Loading...</span>
+                }else if(this.state.error != null){
+                    return <span>Error : {this.state.error.message}</span>
+                }else{//请求完成
+                    var resData = this.state.data.items;
+                    var resList = resData.map(function(repo,index){
+                        return (
+                            <li key={index}><a href={repo.html_url}>{repo.name}</a>({repo.stargazers_count}星)<br/>{repo.description}</li>
+                        )
+                    })
+                    return (//返回瓶装后的列表
+                        <main>
+                            <h1>Most Popular JavaScript Projects in Github</h1>
+                            <ol>{resList}</ol>
+                        </main>
+                    )
+                }
+           }
+       })
+        ReactDOM.render(
+            <UserGist promise={$.getJSON('https://api.github.com/search/repositories?q=javascript&sort=stars')}/>,
+            document.getElementById('example')
+        )
+    </script>
+</body>
+</html>

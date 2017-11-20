@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>this.state</title>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+</head>
+<body>
+    <div id="example"></div>
+    <script type="text/babel">
+        var LikeButton = React.createClass({
+            getInitialState : function () {
+                return {liked : true}
+            },
+            handleToggle : function(event){
+                this.setState({liked : !this.state.liked});//属性显示切换
+            },
+            render : function(){
+                var text = this.state.liked ? '显示了' : '隐藏了';
+
+                return (
+                    <div>
+                        <p style={{display : this.state.liked ? 'block' : 'none'}}>我是显示隐藏切换的文字</p>
+                        <p style={{cursor : 'default'}} onClick={this.handleToggle}>
+                            {text},点击切换
+                        </p>
+                    </div>
+
+                )
+            }
+        })
+        ReactDOM.render(
+            <LikeButton/>,
+            document.getElementById('example')
+        )
+    </script>
+</body>
+</html>

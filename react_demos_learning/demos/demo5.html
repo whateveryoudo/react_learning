@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>初学react</title>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+</head>
+<body>
+    <div id="example"></div>
+    <script type="text/babel">
+//        注意这里this.props.children 为组件的字节点,可能为undefine 对象 数组（>2）,React.Children使用起提供的方法遍历
+      var NodeLists = React.createClass({
+          render : function(){
+              return (
+                      <ol>
+                          {
+                              React.Children.map(this.props.children,function(child){
+                                  return <li>{child}</li>
+                              })
+                          }
+                      </ol>
+              )
+          }
+      })
+        ReactDOM.render(
+            <NodeLists>
+                <span>小明</span>
+                <span>小王</span>
+            </NodeLists>,
+            document.getElementById('example')
+        )
+    </script>
+</body>
+</html>
