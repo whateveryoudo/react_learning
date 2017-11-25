@@ -7,7 +7,8 @@ import element from './pages/jsx/learning_jsx'
 import Welcome from './pages/components/welcome'//组件（Welcome）
 import Comment from './pages/components/Comment'//组件（Comment）
 // import Clock from './pages/lifeCycle/Clock'//组件（Clock）
-import UseState from './pages/lifeCycle/setState'
+// import UseState from './pages/lifeCycle/setState'
+import Clocks from './pages/lifeCycle/Clocks'
 
 import registerServiceWorker from './registerServiceWorker';
 const comment = {//测试数据
@@ -19,5 +20,5 @@ const comment = {//测试数据
     }
 }
 //<Comment author={comment.author} date={comment.date} text={comment.text}/>
-ReactDOM.render(<UseState bb={22}/>, document.getElementById('root'));
+ReactDOM.render(<Clocks/>, document.getElementById('root'));
 registerServiceWorker();
