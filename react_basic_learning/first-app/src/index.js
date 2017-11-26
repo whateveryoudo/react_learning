@@ -6,6 +6,10 @@ import element from './pages/jsx/learning_jsx'
 // import domRender from './pages/domRender/domRender'//定时渲染
 import Welcome from './pages/components/welcome'//组件（Welcome）
 import Comment from './pages/components/Comment'//组件（Comment）
+// import Clock from './pages/lifeCycle/Clock'//组件（Clock）
+// import UseState from './pages/lifeCycle/setState'
+import Clocks from './pages/lifeCycle/Clocks'
+
 import registerServiceWorker from './registerServiceWorker';
 const comment = {//测试数据
     date: new Date(),
@@ -15,5 +19,6 @@ const comment = {//测试数据
         avatarUrl: 'http://placekitten.com/g/64/64'
     }
 }
-ReactDOM.render(<Comment author={comment.author} date={comment.date} text={comment.text}/>, document.getElementById('root'));
+//<Comment author={comment.author} date={comment.date} text={comment.text}/>
+ReactDOM.render(<Clocks/>, document.getElementById('root'));
 registerServiceWorker();
