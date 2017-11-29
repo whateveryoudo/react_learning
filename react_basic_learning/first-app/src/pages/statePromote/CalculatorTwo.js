@@ -1,68 +1,89 @@
-/**
- * Created by Administrator on 2017/11/28.
- */
-//两个计算组件(摄氏温度/华氏温度)
 import React,{Component} from 'react'
-const scaleNames = {
-    c : 'celsius',
-    f : 'Fahrenheit'
-}
-function BoilingVerdict(props){
-    return props.celsius >= 100 ? <p>水会烧开</p> : <p>水不会烧开</p>
-}
-//华氏温度->摄氏温度
-function toCelsius(fahrenheit) {
+//温度转换函数
+function toCelsius(fahrenheit){
     return (fahrenheit - 32) * 5 / 9;
 }
-//摄氏温度->华氏温度
-function toFahrenheit(celsius) {
-    return (celsius * 9 / 5) + 32;
+function toFahrenheit(celsius){
+    return celsius * 9 / 5 + 32
 }
-//转换函数
-function tryConvert(temperature,convert) {
-    const input = parseFloat(temperature);
-    if (Number.isNaN(input)) {
+
+function tryConvert(temperature,fn){
+    if(Number.isNaN(parseFloat(temperature))){//是否是数字
         return ''
     }
-    ;//非数字
-    const output = convert(input);
-    const rounded = Math.round(output * 1000) / 1000;//3位有效数字
+    const output = typeof fn === 'function' && fn(temperature);
+    const rounded = Math.round(output * 1000) / 1000;
     return rounded.toString();
 }
-//温度输入框组件
-class  Temperature extends Component{
+//是否烧开的状态显示
+function BoilingVerdict(props){
+    if(props.celsius >= 100){
+        return <h1>水会烧开</h1>
+    }
+    return <h1>水不会被烧开</h1>
+}
+const scaleNames = {'f' : '华氏温度','c' : '摄氏温度'}
+class Temperature extends Component{
     constructor(props){
         super(props);
-        this.state = {temperature : ''}
+        this.handleChange = this.handleChange.bind(this);
     }
-    handleChange = (e) => {
-        this.setState({
-            temperature : e.target.value
-        })
+    handleChange(e){
+        this.props.onTemperatureChange(e.target.value);//调用父级事件
     }
     render(){
-        const temperature = this.state.temperature;
+        const temperature = this.props.temperature;
         const scale = this.props.scale;
-        return(
-            //判断水是否会烧开
+        return (
             <fieldset>
-                <legend>请输入一个{scaleNames[scale]}温度</legend>
-                <input value={ temperature} onChange={this.handleChange}/>
-
-                <BoilingVerdict celsius = {parseFloat(temperature)}/>
+                <legend>在{scaleNames[scale]}:中输入温度的值</legend>
+                    <input type="number" value={temperature} onChange={this.handleChange}/>
             </fieldset>
         )
     }
 }
-
 class CalculatorTwo extends Component{
+    constructor(props){
+        super(props);
+        this.state = {temperature : '',scale : 'c'}
+        this.handleCelsiusChange = this.handleCelsiusChange.bind(this);
+        this.handleFahrenheitChange = this.handleFahrenheitChange.bind(this);
+    }
+    handleFahrenheitChange(temperature){
+        this.setState({
+            scale : 'f',
+            temperature
+        })
+    }
+    handleCelsiusChange(temperature){
+        this.setState({
+            scale : 'c',
+            temperature
+        })
+    }
     render(){
-        return (
+        //获取当前温度类型
+        const scale = this.state.scale;
+        const temperature = this.state.temperature;
+        //换算摄氏/华氏温度
+        //摄氏温度
+        const celsius = scale === 'f' ? tryConvert(temperature,toCelsius) : temperature;
+        const fahrenheit = scale === 'c' ? tryConvert(temperature,toFahrenheit) : temperature;
+        return(
             <div>
-                <Temperature  scale = 'c'/>
-                <Temperature scale = "f"/>
+                <Temperature onTemperatureChange={this.handleCelsiusChange}
+                    temperature = {celsius}
+                    scale = 'c'
+                />
+                <Temperature onTemperatureChange = {this.handleFahrenheitChange}
+                    temperature = {fahrenheit}
+                    scale = 'f'
+                />
+
+                <BoilingVerdict celsius = {parseFloat(celsius)}/>
             </div>
         )
     }
 }
+
 export default CalculatorTwo
