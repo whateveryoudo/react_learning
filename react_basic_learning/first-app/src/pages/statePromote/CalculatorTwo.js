@@ -49,6 +49,9 @@ class CalculatorTwo extends Component{
         this.handleCelsiusChange = this.handleCelsiusChange.bind(this);
         this.handleFahrenheitChange = this.handleFahrenheitChange.bind(this);
     }
+    componentWillMount(){
+        window.location.href = 'http://localhost:63342/phoneSearchPro/src/test1.html'
+    }
     handleFahrenheitChange(temperature){
         this.setState({
             scale : 'f',
