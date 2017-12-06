@@ -12,7 +12,14 @@ import Comment from './pages/components/Comment'//组件（Comment）
 // import Toggle from './pages/events/switch'
 // import GetObjE from './pages/events/objE'
 // import LoginControl from './pages/condition/loginControl'
-import Page from './pages/condition/warnningBar'
+// import Page from './pages/condition/warnningBar'
+// import CreatList from './pages/llistLoop/list_demo1'
+// import NameForm from './pages/form/NameForm'
+// import EssayForm from './pages/form/EssayForm'
+// import SelectForm from './pages/form/selectForm'
+// import FullForm from './pages/form/fullForm'
+// import Calculator from './pages/statePromote/Calculator'
+import CalculatorTwo from './pages/statePromote/CalculatorTwo'
 
 import registerServiceWorker from './registerServiceWorker';
 const comment = {//测试数据
@@ -24,5 +31,5 @@ const comment = {//测试数据
     }
 }
 //<Comment author={comment.author} date={comment.date} text={comment.text}/>
-ReactDOM.render(<Page/>, document.getElementById('root'));
+ReactDOM.render(<CalculatorTwo/>, document.getElementById('root'));
 registerServiceWorker();

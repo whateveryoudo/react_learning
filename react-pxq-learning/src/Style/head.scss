@@ -1,0 +1,38 @@
+/*头部样式文件*/
+@import "./mixin";
+.head-list{
+    background-color: $mainTheme;
+    @include wh(100%,.44rem);
+    position: relative;
+    top:0;
+    left:0;
+    z-index:999;
+    @include fj();
+    align-items: center;
+    .head_menu{
+        @include wh(.2rem,.15rem);
+        background: url(../assign/icons/icon_menu@3x.png) no-repeat;
+        background-size: 100% 100%;
+        margin-left: .2rem;
+        //隐藏菜单项
+        .head_listname{
+            position: fixed;
+            top:.44rem;
+            left:0;
+            @include wh(100%,100%);
+            background-color: #fff;
+        }
+    }
+    .head_title{
+        @include sc(.17rem,#fff);
+        position: absolute;
+        @include center;
+    }
+    .head_icon_right{
+        @include wh(.18rem,.22rem);
+        background: url(../assign/icons/icon-saleRecord.png) no-repeat;
+        background-size: 100% 100%;
+        margin-right: .1rem;
+    }
+
+}

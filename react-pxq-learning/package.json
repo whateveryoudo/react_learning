@@ -1,0 +1,21 @@
+{
+  "name": "react-pxq-learning",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "node-sass": "^4.7.2",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "react-router": "^2.8.1",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.0.17",
+    "sass": "^1.0.0-beta.3",
+    "sass-loader": "^6.0.6"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
