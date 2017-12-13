@@ -12,7 +12,6 @@ class Main extends Component{
             switch (type){
                 case 'money':
                     let value = event.target.value;
-                    if()
             }
         }
     }
