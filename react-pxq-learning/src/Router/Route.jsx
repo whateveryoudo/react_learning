@@ -1,6 +1,7 @@
 import React,{Component} from 'react'
 import {Router,Route,IndexRoute,browserHistory,hashHistory} from 'react-router'
-import index from '../Component/index';//销售录入
+// import index from '../Component/index';//销售录入
+import App from '../Component/App';//redux学习
 class Roots extends Component{
     render(){
         return(
@@ -24,7 +25,8 @@ const history = process.env.NODE_ENV !== 'production' ? browserHistory : hashHis
 const RouterConfig = (
     <Router history={history}>
         <Route path="/" component={Roots}>
-            <IndexRoute component={index}/>
+            {/*<IndexRoute component={index}/>*/}
+            <IndexRoute component={App}/>
             {/*<Route path="index" component={index} />*/}
         </Route>
     </Router>
