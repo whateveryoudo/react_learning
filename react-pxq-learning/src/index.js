@@ -10,6 +10,7 @@ import registerServiceWorker from './registerServiceWorker';
 
 import './Style/common/common.scss'
 import './Style/head.scss'
+import './Style/index.scss'
 
 ReactDOM.render(route, document.getElementById('root'));
 registerServiceWorker();
