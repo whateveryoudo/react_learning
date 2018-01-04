@@ -7,8 +7,8 @@ class GetObjE extends Component{
         super();
         this.state = {title : '我是标题额...'}
     }
-    preventPop(title,e){
-        e.preventDefault();
+    preventPop(title){
+        // e.preventDefault();
         alert(title);
     }
     render(){
@@ -16,7 +16,7 @@ class GetObjE extends Component{
             //onClick={this.preventPop.bind(this,this.state.title)}
             //箭头函数
 
-            <a href="http://www.baidu.com" onClick={(e) => this.preventPop(this.state.title,e)}>点击弹出标题</a>
+            <a href="javascript:;" onClick={() => this.preventPop()}>点击弹出标题</a>
             )
     }
 }
